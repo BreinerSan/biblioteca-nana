@@ -1,0 +1,37 @@
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_biblioteca_app
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "80:80"
+    networks:
+      - app_network
+
+  db:
+    image: mysql:8.0
+    container_name: laravel_mysql_biblioteca
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel_db
+      MYSQL_USER: laravel_user
+      MYSQL_PASSWORD: secret
+    volumes:
+      - db_biblioteca:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  db_biblioteca:
+    driver: local
