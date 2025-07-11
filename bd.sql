@@ -9,8 +9,7 @@ CREATE TABLE laravel_db.books (
 	pdf_path varchar(255) NULL,
 	created_at TIMESTAMP NULL,
 	updated_at varchar(100) NULL,
-	CONSTRAINT books_unique UNIQUE KEY (isbn),
-	CONSTRAINT books_pk PRIMARY KEY (id)
+	CONSTRAINT books_unique UNIQUE KEY (isbn)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
