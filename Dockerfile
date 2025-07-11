@@ -46,5 +46,8 @@ RUN chown -R www-data:www-data /var/www/html \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
+# Instalar dependencias de Composer (genera vendor)
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+
 # Expose port 80
 EXPOSE 80
