@@ -23,7 +23,7 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
 
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype \
-    && docker-php-ext-install -j$(nproc) pdo pdo_mysql zip exif pcntl gd
+    && docker-php-ext-install -j$(nproc) pdo pdo_pgsql pdo_mysql zip exif pcntl gd
 
 # Habilitar el módulo rewrite de Apache, esencial para Laravel
 RUN a2enmod rewrite
