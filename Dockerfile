@@ -29,11 +29,18 @@ RUN docker-php-ext-configure gd --with-freetype \
 # Habilitar el módulo rewrite de Apache, esencial para Laravel
 RUN a2enmod rewrite
 
+# Instalar Node.js y npm (usa la versión que necesites, aquí ejemplo con Node 20)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
+
 # Copiar los archivos del proyecto al contenedor
 COPY . /var/www/html/
 
 # Set working directory
 WORKDIR /var/www/html
+
+# Instalar dependencias de npm y compilar Vite
+RUN npm install && npm run build
 
 COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 
